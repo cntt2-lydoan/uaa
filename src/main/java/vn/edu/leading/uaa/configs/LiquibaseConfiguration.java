@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 
 @Configuration
 public class LiquibaseConfiguration {
+
     private final Logger log = LoggerFactory.getLogger(LiquibaseConfiguration.class);
 
     private final Environment env;
@@ -23,7 +24,8 @@ public class LiquibaseConfiguration {
     public SpringLiquibase liquibase(DataSource dataSource) {
         SpringLiquibase liquibase = new SpringLiquibase();
         liquibase.setDataSource(dataSource);
-        liquibase.setChangeLog("classpath:config.liquibase/master.xml");
+        liquibase.setChangeLog("classpath:config/liquibase/master.xml");
+
         if (this.env.acceptsProfiles("no-liquibase")) {
             liquibase.setShouldRun(false);
         } else {
